@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!--HANDLEBARS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js" charset="utf-8"></script>
+    <!--FONTAWESOME-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!--MOMENT-->
+    <script src="https://momentjs.com/downloads/moment.min.js" charset="utf-8"></script>
+    <!--SWEETALERT2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <!--META TAG VIEWPORT-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--CSS-->
+    <link rel="stylesheet" href="style.css">
+    <!--JAVASCRIPT-->
+    <script src="main.js" charset="utf-8"></script>
+  </head>
+  <body>
+
+  <header>
+    <div class="header__logo">BOOLFLIX</div>
+    <div class="header__search">
+      <input id="search"type="text" placeholder="search movie" name="" value="">
+      <i class="fas fa-search"></i>
+    </div>
+  </header>
+
+  <div class="card__container">
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <!--HANDLEBARS-->
+    <script id ="card__template" type ="text/x-handlebars-template">
+      <div class="card__movie">
+        <ul>
+          <img src="" alt="">
+          <li><span>Titolo: </span>{{dato1}}</li>
+          <li><span>Titolo Originale: </span>{{dato2}}</li>
+          <li><span>Lingua: </span>{{dato3}}</li>
+          <li><span>Voto: </span>{{dato4}}</li>
+        </ul>
+      </div>
+    </script>
+
+  </body>
+</html>
