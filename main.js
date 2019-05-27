@@ -16,6 +16,7 @@
 
 $(document).ready(function(){
 
+    //aggiungo alert di benvenuto
     Swal.fire({
     title: 'Benvenuto su BOOLFLIX',
     text: 'clicca sull\'icona in alto a destra per carcare un film',
@@ -25,8 +26,10 @@ $(document).ready(function(){
     }
   })
 
+  //nascondo search-bar
   $('#search').hide();
 
+  //al click sull'icona visualizzo la search-bar
   $('.fa-search').click(function(){
     $('#search').fadeIn(500);
   });
@@ -37,12 +40,14 @@ $(document).ready(function(){
   //intercetto il tasto invio
   $('#search').keypress(function(event){
 
+  //salvo la ricerca utente in una variabile
   var movie_utente = $('#search').val();
   console.log(movie_utente);
 
   //intercetto il tasto invio
   if (event.which == 13) {
 
+    //svuoto il contenitore per la nuova ricerca
     $('.card__container').empty();
 
     //creo chiamata ajax
@@ -57,16 +62,20 @@ $(document).ready(function(){
       success: function(risposta){
         //console.log(risposta.results);
 
+        //metto dentro a una variabile il contenuto della risposta
         var contenuto = risposta.results;
         console.log(contenuto);
 
+        //eseguo ciclo per scorrere le proprieta
         for (var i = 0; i < contenuto.length; i++) {
 
+          //popolo l'oggetto con le informazioni ottenute
           var movie = {
             dato1: contenuto[i].title,
             dato2: contenuto[i].original_title,
             dato3: contenuto[i].original_language,
             dato4: contenuto[i].vote_average,
+            // dato5: contenuto[i].overview,
           }
 
           var card__template = $('#card__template').html();
@@ -74,8 +83,8 @@ $(document).ready(function(){
           var template__function = Handlebars.compile(card__template);
 
           var html = template__function(movie);
-          console.log(html);
 
+          //appendo la card del film
           $('.card__container').append(html);
         }
 

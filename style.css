@@ -42,6 +42,7 @@ cursor: pointer;
 background-color: black;
 border: 2px solid white;
 color: white;
+overflow: hidden;
 }
 .card__movie:hover{
   /* transform: rotateY(180deg); */
