@@ -50,7 +50,7 @@ $(document).ready(function(){
     //svuoto il contenitore per la nuova ricerca
     $('.card__container').empty();
 
-    //creo chiamata ajax
+    //chiamata ajax
     $.ajax({
       url: url_base_movie,
       method: 'GET',
@@ -69,24 +69,64 @@ $(document).ready(function(){
         //eseguo ciclo per scorrere le proprieta
         for (var i = 0; i < contenuto.length; i++) {
 
+          // var img = contenuto[i].backdrop_path;
+          // console.log(img);
+          //
+          // //https://image.tmdb.org/t/p/w185/s2VDcsMh9ZhjFUxw77uCFDpTuXp.jpg
+          // var url_base_img = "https://image.tmdb.org/t/p/w185";
+          //
+          // $.ajax({
+          //   url: url_base_img,
+          //   method: 'GET',
+          //   data: {
+          //     img: img,
+          //   },
+          //   success: function(risposta){
+          //     console.log(risposta.results);
+          //
+          //
+          //
+          //
+          //
+          //   }, error: function(richiesta, stato, errori){
+          //     console.log(errori);
+          //   }
+          // });
+
+          //aggiungo le serie tv alla ricerca
           if (contenuto[i].media_type == "tv") {
             var tipo = contenuto[i].original_name;
             var nome = contenuto[i].name;
+            var formato = 'TV series';
           }else{
             var tipo = contenuto[i].original_title;
             var nome = contenuto[i].title;
+            var formato = 'Movie';
           }
 
           //metto la lingua all'interno di una variabile
           var lingua = contenuto[i].original_language;
           //console.log(lingua);
 
+          //https://www.countryflags.io/MY/flat/64.png
+          // switch (lingua) {
+          //   case 'en':
+          //     lingua = 'us';
+          //     break;
+          //   case 'ja':
+          //     lingua = 'jp'
+          //     break;
+          //   default:
+          // }
+
           if (lingua == 'en') {
             lingua = 'us';
-            console.log(lingua);
+            //console.log(lingua);
+          } else if (lingua == 'ja') {
+            lingua = 'jp';
+          } else {
+            lingua;
           }
-
-          //https://www.countryflags.io/MY/flat/64.png
 
           var id = i;
           //console.log(id);
@@ -98,6 +138,7 @@ $(document).ready(function(){
             dato3: lingua,
             dato4: id,
             // dato5: contenuto[i].overview,
+            dato6: formato,
           }
 
           // typeof <-- specifica il tipo -- si usa con spazio
@@ -106,21 +147,20 @@ $(document).ready(function(){
           var star = parseFloat(contenuto[i].vote_average).toFixed();
           //console.log(typeof star);
 
+          //limito la valutazione a 5
           if (star > 5) {
             star = 5;
           }
 
           //console.log(star);
-
           var card__template = $('#card__template').html();
-
           var template__function = Handlebars.compile(card__template);
-
           var html = template__function(movie);
 
           //appendo la card del film
           $('.card__container').append(html);
 
+          //appendo le stelle alle card
           for (var j = 0; j < star; j++) {
             //console.log(star);
             $('.stars').closest('.card__movie[data-id="'+i+'"]').append('<i class="fas fa-star"></i>');

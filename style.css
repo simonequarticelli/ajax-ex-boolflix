@@ -53,14 +53,22 @@ overflow: hidden;
 .card__movie ul li{
   list-style-type: none;
   margin:20px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .card__movie ul li span{
   font-weight: bold;
   font-size: 15px;
+  margin-right: 5px;
 }
 .fa-star{
   color:yellow;
 }
 .card__movie img{
-  line-height: normal;
+  margin: 0px 10px;
+}
+.format{
+  color:orange;
 }
