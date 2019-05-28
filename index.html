@@ -25,7 +25,7 @@
   <header>
     <div class="header__logo">BOOLFLIX</div>
     <div class="header__search">
-      <input id="search"type="text" placeholder="search movie" name="" value="">
+      <input id="search"type="text" placeholder="search movies or tv shows" name="" value="">
       <i class="fas fa-search"></i>
     </div>
   </header>
@@ -46,13 +46,13 @@
 
   <!--HANDLEBARS-->
     <script id ="card__template" type ="text/x-handlebars-template">
-      <div class="card__movie">
+      <div class="card__movie" data-id="{{ dato4 }}">
         <ul>
           <img src="" alt="">
           <li><span>Titolo: </span>{{ dato1 }}</li>
           <li><span>Titolo Originale: </span>{{ dato2 }}</li>
-          <li><span>Lingua: </span>{{ dato3 }}</li>
-          <li><span>Voto: </span>{{ dato4 }}</li>
+          <li><span>Lingua: </span><img src="https://www.countryflags.io/{{ dato3 }}/shiny/24.png" alt=""></li>
+          <li class="stars"><span>Voto: </span></li>
         </ul>
         <!-- <div id="trama">
           <span>Overview: </span>{{ dato5 }}

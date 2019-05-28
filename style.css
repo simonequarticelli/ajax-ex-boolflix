@@ -7,13 +7,14 @@ header{
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding:20px;
+  padding:25px;
   background-color: black;
+  align-items: center;
 }
 .header__logo{
   color: red;
   margin-left: 50px;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
 }
 .fa-search{
@@ -23,6 +24,8 @@ header{
 }
 #search{
   margin-right: 20px;
+  padding: 5px 70px 5px 5px;
+  border:0;
 }
 .card__container{
   display: flex;
@@ -54,4 +57,10 @@ overflow: hidden;
 .card__movie ul li span{
   font-weight: bold;
   font-size: 15px;
-{
+}
+.fa-star{
+  color:yellow;
+}
+.card__movie img{
+  line-height: normal;
+}

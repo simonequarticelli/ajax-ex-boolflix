@@ -35,14 +35,14 @@ $(document).ready(function(){
   });
 
   //salvo url base per i film dentro a una variabile
-  var url_base_movie = "https://api.themoviedb.org/3/search/movie";
+  var url_base_movie = "https://api.themoviedb.org/3/search/multi";
 
   //intercetto il tasto invio
-  $('#search').keypress(function(event){
+  $('#search').keyup(function(event){
 
   //salvo la ricerca utente in una variabile
   var movie_utente = $('#search').val();
-  console.log(movie_utente);
+  //console.log(movie_utente);
 
   //intercetto il tasto invio
   if (event.which == 13) {
@@ -69,14 +69,48 @@ $(document).ready(function(){
         //eseguo ciclo per scorrere le proprieta
         for (var i = 0; i < contenuto.length; i++) {
 
+          if (contenuto[i].media_type == "tv") {
+            var tipo = contenuto[i].original_name;
+            var nome = contenuto[i].name;
+          }else{
+            var tipo = contenuto[i].original_title;
+            var nome = contenuto[i].title;
+          }
+
+          //metto la lingua all'interno di una variabile
+          var lingua = contenuto[i].original_language;
+          //console.log(lingua);
+
+          if (lingua == 'en') {
+            lingua = 'us';
+            console.log(lingua);
+          }
+
+          //https://www.countryflags.io/MY/flat/64.png
+
+          var id = i;
+          //console.log(id);
+
           //popolo l'oggetto con le informazioni ottenute
           var movie = {
-            dato1: contenuto[i].title,
-            dato2: contenuto[i].original_title,
-            dato3: contenuto[i].original_language,
-            dato4: contenuto[i].vote_average,
+            dato1: nome,
+            dato2: tipo,
+            dato3: lingua,
+            dato4: id,
             // dato5: contenuto[i].overview,
           }
+
+          // typeof <-- specifica il tipo -- si usa con spazio
+
+          //salvo la valutazione del film e la arrotondo per eccesso
+          var star = parseFloat(contenuto[i].vote_average).toFixed();
+          //console.log(typeof star);
+
+          if (star > 5) {
+            star = 5;
+          }
+
+          //console.log(star);
 
           var card__template = $('#card__template').html();
 
@@ -86,6 +120,11 @@ $(document).ready(function(){
 
           //appendo la card del film
           $('.card__container').append(html);
+
+          for (var j = 0; j < star; j++) {
+            //console.log(star);
+            $('.stars').closest('.card__movie[data-id="'+i+'"]').append('<i class="fas fa-star"></i>');
+          }
         }
 
       }, error: function(richiesta, stato, errori){
@@ -95,6 +134,7 @@ $(document).ready(function(){
     });
 
   }
+
 
 
 
