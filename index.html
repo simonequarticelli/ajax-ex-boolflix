@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>BOOLFLIX</title>
     <!--JQUERY-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <!--HANDLEBARS-->
@@ -36,23 +36,15 @@
 
 
 
-
-
-
-
-
-
-
-
   <!--HANDLEBARS-->
     <script id ="card__template" type ="text/x-handlebars-template">
       <div class="card__movie" data-id="{{ dato4 }}">
-        <ul>
-          <img src="" alt="">
+        <img class="poster_path"src="https://image.tmdb.org/t/p/w185{{dato7}}" alt="">
+        <ul class="info">
           <li class="format"><strong>{{{ dato6 }}}</strong></li>
           <li><span>Titolo: </span>{{ dato1 }}</li>
           <li><span>Titolo Originale: </span>{{ dato2 }}</li>
-          <li><span>Lingua: </span>{{ dato3 }}<img src="https://www.countryflags.io/{{ dato3 }}/shiny/24.png" alt=""></li>
+          <li><span>Lingua: </span><img src="https://www.countryflags.io/{{ dato3 }}/shiny/24.png" alt=""></li>
           <li class="stars"><span>Voto: </span></li>
         </ul>
           <!-- <div id="trama">

@@ -16,8 +16,10 @@
 
 $(document).ready(function(){
 
-    //aggiungo alert di benvenuto
-    Swal.fire({
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //aggiungo alert di benvenuto
+  Swal.fire({
     title: 'Benvenuto su BOOLFLIX',
     text: 'clicca sull\'icona in alto a destra per carcare un film',
     animation: true,
@@ -26,13 +28,19 @@ $(document).ready(function(){
     }
   })
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+
   //nascondo search-bar
   $('#search').hide();
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //al click sull'icona visualizzo la search-bar
   $('.fa-search').click(function(){
     $('#search').fadeIn(500);
   });
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //salvo url base per i film dentro a una variabile
   var url_base_movie = "https://api.themoviedb.org/3/search/multi";
@@ -47,9 +55,13 @@ $(document).ready(function(){
   //intercetto il tasto invio
   if (event.which == 13) {
 
+    //pulisco la ricerca ad ogni invio
+    $('#search').val(' ');
+
     //svuoto il contenitore per la nuova ricerca
     $('.card__container').empty();
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
     //chiamata ajax
     $.ajax({
       url: url_base_movie,
@@ -69,29 +81,31 @@ $(document).ready(function(){
         //eseguo ciclo per scorrere le proprieta
         for (var i = 0; i < contenuto.length; i++) {
 
-          // var img = contenuto[i].backdrop_path;
-          // console.log(img);
-          //
-          // //https://image.tmdb.org/t/p/w185/s2VDcsMh9ZhjFUxw77uCFDpTuXp.jpg
-          // var url_base_img = "https://image.tmdb.org/t/p/w185";
-          //
-          // $.ajax({
-          //   url: url_base_img,
-          //   method: 'GET',
-          //   data: {
-          //     img: img,
-          //   },
-          //   success: function(risposta){
-          //     console.log(risposta.results);
-          //
-          //
-          //
-          //
-          //
-          //   }, error: function(richiesta, stato, errori){
-          //     console.log(errori);
-          //   }
-          // });
+          var img = contenuto[i].poster_path;
+          //console.log(img);
+
+          /////////////////////////////////////////////////////////////////////////////////////////////////////
+          //https://api.themoviedb.org/3/person/{person_id}/movie_credits?api_key=<<api_key>>&language=en-US
+          var url_base_person = "https://api.themoviedb.org/3/person";
+          //chiamata per cast
+          $.ajax({
+            url: url_base_person,
+            method: 'GET',
+            data: {
+
+            },
+            success: function(risposta){
+              console.log(risposta);
+
+
+
+
+
+            }, error: function(richiesta, stato, errori){
+              console.log(errori);
+            }
+          });
+          /////////////////////////////////////////////////////////////////////////////////////////////////////
 
           //aggiungo le serie tv alla ricerca
           if (contenuto[i].media_type == "tv") {
@@ -106,30 +120,22 @@ $(document).ready(function(){
 
           //metto la lingua all'interno di una variabile
           var lingua = contenuto[i].original_language;
-          //console.log(lingua);
+          console.log(lingua);
 
-          //https://www.countryflags.io/MY/flat/64.png
-          // switch (lingua) {
-          //   case 'en':
-          //     lingua = 'us';
-          //     break;
-          //   case 'ja':
-          //     lingua = 'jp'
-          //     break;
-          //   default:
-          // }
+          /////////////////////////////////////////////////////////////////////////////////////////////////////
 
+          //fix name flag
           if (lingua == 'en') {
             lingua = 'us';
             //console.log(lingua);
           } else if (lingua == 'ja') {
             lingua = 'jp';
-          } else {
-            lingua;
           }
 
           var id = i;
           //console.log(id);
+
+          /////////////////////////////////////////////////////////////////////////////////////////////////////
 
           //popolo l'oggetto con le informazioni ottenute
           var movie = {
@@ -139,18 +145,23 @@ $(document).ready(function(){
             dato4: id,
             // dato5: contenuto[i].overview,
             dato6: formato,
+            dato7: img,
           }
+
+          /////////////////////////////////////////////////////////////////////////////////////////////////////
 
           // typeof <-- specifica il tipo -- si usa con spazio
 
-          //salvo la valutazione del film e la arrotondo per eccesso
-          var star = parseFloat(contenuto[i].vote_average).toFixed();
+          //salvo la valutazione del film e la arrotondo per eccesso dividendola per 2
+          var star = parseFloat(contenuto[i].vote_average).toFixed()/2;
           //console.log(typeof star);
 
           //limito la valutazione a 5
           if (star > 5) {
             star = 5;
           }
+
+          /////////////////////////////////////////////////////////////////////////////////////////////////////
 
           //console.log(star);
           var card__template = $('#card__template').html();
@@ -160,11 +171,25 @@ $(document).ready(function(){
           //appendo la card del film
           $('.card__container').append(html);
 
-          //appendo le stelle alle card
-          for (var j = 0; j < star; j++) {
-            //console.log(star);
-            $('.stars').closest('.card__movie[data-id="'+i+'"]').append('<i class="fas fa-star"></i>');
+          //appendo le stelle
+          for (var s = 0; s < 5; s++) {
+            if (s < star) {
+              $('.card__movie[data-id="'+i+'"]').find('.stars').append('<i class="fas fa-star"></i>');
+            }else{
+              $('.card__movie[data-id="'+i+'"]').find('.stars').append('<i class="far fa-star"></i>');
+            }
           }
+
+          /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+          $('.info').hide();
+
+          $('.poster_path').mouseenter(function(){
+            $(this).fadeOut(1000, function(){
+              $(this).siblings('.info').fadeIn();
+            });
+          });
+
         }
 
       }, error: function(richiesta, stato, errori){
@@ -175,22 +200,7 @@ $(document).ready(function(){
 
   }
 
-
-
-
 })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 });
