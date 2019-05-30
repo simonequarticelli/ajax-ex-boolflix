@@ -78,33 +78,27 @@ $(document).ready(function(){
         var contenuto = risposta.results;
         console.log(contenuto);
 
+        //controllo se il film inserito è presente
+        if (contenuto == '') {
+          Swal.fire({
+            title: 'Movie not find',
+            // text: 'choose another one',
+            type: 'error',
+            confirmButtonText: 'ok'
+          })
+        }
+
         //eseguo ciclo per scorrere le proprieta
         for (var i = 0; i < contenuto.length; i++) {
 
+          //locandina
           var img = contenuto[i].poster_path;
-          //console.log(img);
 
           /////////////////////////////////////////////////////////////////////////////////////////////////////
-          //https://api.themoviedb.org/3/person/{person_id}/movie_credits?api_key=<<api_key>>&language=en-US
-          // var url_base_person = "https://api.themoviedb.org/3/person";
-          // //chiamata per cast
-          // $.ajax({
-          //   url: url_base_person,
-          //   method: 'GET',
-          //   data: {
-          //
-          //   },
-          //   success: function(risposta){
-          //     console.log(risposta);
-          //
-          //
-          //
-          //
-          //
-          //   }, error: function(richiesta, stato, errori){
-          //     console.log(errori);
-          //   }
-          // });
+          //id film per cast
+          var id = contenuto[i].id;
+          //console.log(id);
+
           /////////////////////////////////////////////////////////////////////////////////////////////////////
 
           //aggiungo le serie tv alla ricerca
@@ -120,7 +114,7 @@ $(document).ready(function(){
 
           //metto la lingua all'interno di una variabile
           var lingua = contenuto[i].original_language;
-          console.log(lingua);
+          //console.log(lingua);
 
           /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -135,12 +129,38 @@ $(document).ready(function(){
           var id = i;
           //console.log(id);
 
+          //chiamata per cast
+          $.ajax({
+            url: "https://api.themoviedb.org/3/movie/"+id+"/credits",
+            method: 'GET',
+            data: {
+              movie_id: id,
+              api_key: "d12ae54df472b7dfaec7f47b6ee5fdd3",
+            },
+            success: function(risposta){
+              //console.log(risposta.cast);
+              var cast = risposta.cast;
+
+
+              for (var a = 0; a < 5 && a < cast.length; a++) { //<-- condizioni sempre in mezzo
+                var attori = cast[a].name;
+                //console.log(attori);
+                $('.card__movie[data-id="'+i+'"]').find('.actors').append(attori + '<br>');
+                console.log($('.card__movie[data-id="'+i+'"]'));
+              }
+
+
+            }, error: function(richiesta, stato, errori){
+              console.log(errori);
+            }
+          });
+
           /////////////////////////////////////////////////////////////////////////////////////////////////////
 
           //popolo l'oggetto con le informazioni ottenute
           var movie = {
             dato1: nome,
-            dato2: tipo,
+            // dato2: tipo,
             dato3: lingua,
             dato4: id,
             dato5: contenuto[i].overview,
@@ -171,6 +191,10 @@ $(document).ready(function(){
           //appendo la card del film
           $('.card__container').append(html);
 
+
+
+
+
           //appendo le stelle
           for (var s = 0; s < 5; s++) {
             if (s < star) {
@@ -185,10 +209,17 @@ $(document).ready(function(){
           $('.info').hide();
 
 
-          $('.poster_path').mouseenter(function(){
-            $(this).fadeOut(500, function(){
-              $(this).closest('.card__movie').addClass('scrool');
+          $('.card__movie').mouseenter(function(){
+            $(this).find('.poster_path').fadeOut(1000, function(){
+              $(this).parent('.card__movie').addClass('scrool');
               $(this).siblings('.info').fadeIn();
+            });
+
+
+          }).mouseleave(function(){
+            $(this).find('.info').fadeOut(1000, function(){
+              $(this).parent('.card__movie').removeClass('scrool');
+              $(this).siblings('.poster_path').fadeIn();
             })
           })
 

@@ -70,6 +70,10 @@ color: white;
 .overview{
   padding: 10px;
 }
+.actors{
+  display: flex;
+  flex-direction: column;
+}
 .scrool{
   overflow: auto;
 }
