@@ -86,25 +86,25 @@ $(document).ready(function(){
 
           /////////////////////////////////////////////////////////////////////////////////////////////////////
           //https://api.themoviedb.org/3/person/{person_id}/movie_credits?api_key=<<api_key>>&language=en-US
-          var url_base_person = "https://api.themoviedb.org/3/person";
-          //chiamata per cast
-          $.ajax({
-            url: url_base_person,
-            method: 'GET',
-            data: {
-
-            },
-            success: function(risposta){
-              console.log(risposta);
-
-
-
-
-
-            }, error: function(richiesta, stato, errori){
-              console.log(errori);
-            }
-          });
+          // var url_base_person = "https://api.themoviedb.org/3/person";
+          // //chiamata per cast
+          // $.ajax({
+          //   url: url_base_person,
+          //   method: 'GET',
+          //   data: {
+          //
+          //   },
+          //   success: function(risposta){
+          //     console.log(risposta);
+          //
+          //
+          //
+          //
+          //
+          //   }, error: function(richiesta, stato, errori){
+          //     console.log(errori);
+          //   }
+          // });
           /////////////////////////////////////////////////////////////////////////////////////////////////////
 
           //aggiungo le serie tv alla ricerca
@@ -143,7 +143,7 @@ $(document).ready(function(){
             dato2: tipo,
             dato3: lingua,
             dato4: id,
-            // dato5: contenuto[i].overview,
+            dato5: contenuto[i].overview,
             dato6: formato,
             dato7: img,
           }
@@ -184,11 +184,13 @@ $(document).ready(function(){
 
           $('.info').hide();
 
+
           $('.poster_path').mouseenter(function(){
-            $(this).fadeOut(1000, function(){
+            $(this).fadeOut(500, function(){
+              $(this).closest('.card__movie').addClass('scrool');
               $(this).siblings('.info').fadeIn();
-            });
-          });
+            })
+          })
 
         }
 

@@ -13,6 +13,8 @@
     <script src="https://momentjs.com/downloads/moment.min.js" charset="utf-8"></script>
     <!--SWEETALERT2-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <!--JQUERY-SCROLLER-->
+
     <!--META TAG VIEWPORT-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--CSS-->
@@ -39,17 +41,15 @@
   <!--HANDLEBARS-->
     <script id ="card__template" type ="text/x-handlebars-template">
       <div class="card__movie" data-id="{{ dato4 }}">
-        <img class="poster_path"src="https://image.tmdb.org/t/p/w185{{dato7}}" alt="">
+        <img class="poster_path"src="https://image.tmdb.org/t/p/w342{{dato7}}" alt="">
         <ul class="info">
           <li class="format"><strong>{{{ dato6 }}}</strong></li>
           <li><span>Titolo: </span>{{ dato1 }}</li>
           <li><span>Titolo Originale: </span>{{ dato2 }}</li>
           <li><span>Lingua: </span><img src="https://www.countryflags.io/{{ dato3 }}/shiny/24.png" alt=""></li>
           <li class="stars"><span>Voto: </span></li>
+          <li class="overview"><span>Overview: </span>{{ dato5 }}</li>
         </ul>
-          <!-- <div id="trama">
-            <span>Overview: </span>{{ dato5 }}
-          </div> -->
       </div>
     </script>
 
