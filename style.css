@@ -3,11 +3,15 @@
   margin: 0;
   padding: 0;
 }
+body{
+  background-image: url("https://vignette.wikia.nocookie.net/nwnetflix/images/5/50/Wiki-background/revision/latest?cb=20190411162238");
+  background-size: cover;
+}
 header{
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding:25px;
+  padding:10px;
   background-color: black;
   align-items: center;
 }

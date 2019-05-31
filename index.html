@@ -25,7 +25,7 @@
   <body>
 
   <header>
-    <div class="header__logo">BOOLFLIX</div>
+    <div class="header__logo"><img src="https://fontmeme.com/permalink/190530/799deaf799482bd8a60a501a402a051d.png" alt="netflix-font" border="0"></div>
     <div class="header__search">
       <input id="search"type="text" placeholder="search movies or tv shows" name="" value="">
       <i class="fas fa-search"></i>
@@ -41,15 +41,15 @@
   <!--HANDLEBARS-->
     <script id ="card__template" type ="text/x-handlebars-template">
       <div class="card__movie" data-id="{{ dato4 }}">
-        <img class="poster_path"src="https://image.tmdb.org/t/p/w342{{dato7}}" alt="">
+        <img class="poster_path"src="{{ dato7 }}" alt="">
         <ul class="info">
           <li class="format"><strong>{{{ dato6 }}}</strong></li>
           <li><span>Titolo: </span>{{ dato1 }}</li>
           <!-- <li><span>Titolo Originale: </span>{{ dato2 }}</li> -->
-          <li><span>Lingua: </span><img src="https://www.countryflags.io/{{ dato3 }}/shiny/24.png" alt=""></li>
+          <li><span>Lingua: </span><img src="{{ dato3 }}" alt=""></li>
           <li class="stars"><span>Voto: </span></li>
           <li class="overview"><span>Overview: </span>{{ dato5 }}</li>
-          <li class="actors"><span>Attori: </span>{{ dato8 }}</li>
+          <li class="actors"><span>Attori: </span></li>
         </ul>
       </div>
     </script>
