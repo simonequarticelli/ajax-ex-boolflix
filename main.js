@@ -16,6 +16,15 @@
 
 $(document).ready(function(){
 
+
+    $('.card__container').slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 3
+    });
+
+
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //aggiungo alert di benvenuto
@@ -81,7 +90,7 @@ $(document).ready(function(){
           //controllo se il film inserito è presente
           if (contenuto == '') {
             Swal.fire({
-              title: 'Movie not find',
+              title: 'Movie or Tv show not find',
               // text: 'choose another one',
               type: 'error',
               confirmButtonText: 'ok'
@@ -90,6 +99,24 @@ $(document).ready(function(){
 
           //eseguo ciclo per scorrere le proprieta
           for (var i = 0; i < contenuto.length; i++) {
+
+            var genere_id = contenuto[i].genre_ids;
+            console.log(genere_id);
+
+            // $.ajax({
+            //   url: url_base_movie,
+            //   method: 'GET',
+            //   data: {
+            //     'api_key': 'd12ae54df472b7dfaec7f47b6ee5fdd3',
+            //     'query': movie_utente,
+            //     'language': 'it-IT'
+            //   },
+            //   success: function(risposta){
+            //
+            // });
+
+
+
 
             //locandina
             var img = contenuto[i].poster_path;
@@ -138,16 +165,20 @@ $(document).ready(function(){
 
             //console.log(lingua);
 
+            var flg = "https://www.countryflags.io/"+lingua+"/shiny/24.png";
+            //console.log(flg);
+
             if (flg == null) {
               flag = lingua;
-              console.log(flag);
+              //console.log(flag);
             }
 
-            var flg = "https://www.countryflags.io/"+lingua+"/shiny/24.png"
-            console.log(flg);
+            var trama = contenuto[i].overview;
+            //console.log(trama);
 
-            var id = i;
-            //console.log(id);
+            if (trama == '') {
+              trama = 'sorry not find';
+            }
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -156,8 +187,8 @@ $(document).ready(function(){
               dato1: nome,
               // dato2: tipo,
               dato3: flg,
-              dato4: id,
-              dato5: contenuto[i].overview,
+              dato4: i,
+              dato5: trama,
               dato6: formato,
               dato7: loc,
             }
@@ -185,35 +216,7 @@ $(document).ready(function(){
             //appendo la card del film
             $('.card__container').append(html);
 
-            //chiamata per cast
-            $.ajax({
-              url: "https://api.themoviedb.org/3/movie/"+id+"/credits",
-              method: 'GET',
-              data: {
-                movie_id: id,
-                api_key: "d12ae54df472b7dfaec7f47b6ee5fdd3",
-              },
-              success: function(risposta){
-                console.log(risposta.cast);
-                var cast = risposta.cast;
-                console.log(cast);
-
-
-
-
-                for (var t = 0; t < 5 && t < cast.length; t++) { //<-- condizioni sempre in mezzo
-                  var attori = cast[t].name;
-                  console.log(attori);
-                  $('.card__movie[data-id="'+i+'"]').find('.actors').append(attori + '<br>');
-                  // console.log($('.card__movie[data-id="'+i+'"]'));
-                }
-
-
-              }, error: function(richiesta, stato, errori){
-                console.log(errori);
-              }
-
-            });
+            recupera_cast(i, id);
 
             //appendo le stelle
             for (var s = 0; s < 5; s++) {
@@ -231,29 +234,65 @@ $(document).ready(function(){
 
             $('.card__movie').mouseenter(function(){
               $(this).find('.poster_path').fadeOut(200, function(){
-                $(this).parent('.card__movie').addClass('scrool');
                 $(this).siblings('.info').fadeIn();
+                $(this).parent('.card__movie').addClass('scrool');
               });
 
 
             }).mouseleave(function(){
-              $(this).find('.info').fadeOut(200, function(){
-                $(this).parent('.card__movie').removeClass('scrool');
-                $(this).siblings('.poster_path').fadeIn();
+                $(this).find('.info').fadeOut(200, function(){
+                  $(this).siblings('.poster_path').fadeIn();
+                  $(this).parent('.card__movie').removeClass('scrool');
+
+                })
               })
-            })
+
+
 
           }
 
         }, error: function(richiesta, stato, errori){
           console.log(errori);
+
         }
 
       });
+
+
 
     }
 
   })
 
+  function recupera_cast(i, id){
+    //chiamata per cast
+    $.ajax({
+      url: "https://api.themoviedb.org/3/movie/"+id+"/credits",
+      method: 'GET',
+      data: {
+        movie_id: id,
+        api_key: "d12ae54df472b7dfaec7f47b6ee5fdd3",
+      },
+      success: function(risposta){
+        //console.log(risposta.cast);
+        var cast = risposta.cast;
+        //console.log(cast);
+
+        for (var t = 0; t < 5 && t < cast.length; t++) { //<-- condizioni sempre in mezzo
+          var attori = cast[t].name;
+          //console.log(attori);
+          $('.card__movie[data-id="'+i+'"]').find('.actors').append(attori + '<br>');
+          //console.log($('.card__movie[data-id="'+i+'"]'));
+
+        }
+
+      }, error: function(richiesta, stato, errori){
+        console.log(errori);
+        attori = 'sorry not find';
+        $('.card__movie[data-id="'+i+'"]').find('.actors').append(attori);
+      }
+
+    });
+  }
 
 });

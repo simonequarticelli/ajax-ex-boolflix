@@ -13,10 +13,12 @@
     <script src="https://momentjs.com/downloads/moment.min.js" charset="utf-8"></script>
     <!--SWEETALERT2-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <!--JQUERY-SCROLLER-->
-
     <!--META TAG VIEWPORT-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--SLICK-JS-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <!--SLICK-CSS-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <!--CSS-->
     <link rel="stylesheet" href="style.css">
     <!--JAVASCRIPT-->
@@ -25,11 +27,24 @@
   <body>
 
   <header>
-    <div class="header__logo"><img src="https://fontmeme.com/permalink/190530/799deaf799482bd8a60a501a402a051d.png" alt="netflix-font" border="0"></div>
+  <div class="header__left">
+      <span><img src="https://fontmeme.com/permalink/190531/5d828b6e3ab3aa3a28d3d1d6c8d7cf81.png" alt=""></span>
+      <strong>Home</strong>
+      <span>Serie TV</span>
+      <span>Film</span>
+      <span>Aggiunti di recente</span>
+      <span>La mia lista</span>
+  </div>
+  <div class="header__right">
     <div class="header__search">
       <input id="search"type="text" placeholder="search movies or tv shows" name="" value="">
       <i class="fas fa-search"></i>
+      <span>BAMBINI</span>
+      <i class="fas fa-bell"></i>
+      <i class="fas fa-user-circle"></i>
+      <i class="fas fa-caret-down"></i>
     </div>
+  </div>
   </header>
 
   <div class="card__container">
@@ -48,7 +63,7 @@
           <!-- <li><span>Titolo Originale: </span>{{ dato2 }}</li> -->
           <li><span>Lingua: </span><img src="{{ dato3 }}" alt=""></li>
           <li class="stars"><span>Voto: </span></li>
-          <li class="overview"><span>Overview: </span>{{ dato5 }}</li>
+          <li class="overview"><span>Trama: </span>{{ dato5 }}</li>
           <li class="actors"><span>Attori: </span></li>
         </ul>
       </div>
