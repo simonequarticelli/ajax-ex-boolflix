@@ -16,15 +16,23 @@
 
 $(document).ready(function(){
 
-  $('.card__container').animate({scrollLeft: 0});
+    $('#prec').hide();
 
-  $('#next').click(function(){
-    $('.card__container').animate({scrollLeft: '+=1400'}, 800);
-  })
+    $('.card__container').animate({scrollLeft: 0});
 
-  $('#prec').click(function(){
-    $('.card__container').animate({scrollLeft: '-=1400'}, 800);
-  })
+    $('#prec').click(function(){
+      $('.card__container').animate({scrollLeft: '-=1400'}, 800);
+      $('#next').show();
+    })
+
+    $('#next').click(function(){
+      $('.card__container').animate({scrollLeft: '+=1400'}, 800);
+      $('#prec').show();
+      if ($('.card__container').last('.card__movie').scrollLeft()) {
+        $('#next').hide();
+      }
+
+    })
 
   api_movie_or_tv_show('superman');
 
@@ -127,7 +135,7 @@ $(document).ready(function(){
           for (var d = 0; d < genere_id.length; d++) {
             //console.log(genere_id[d]);
             var id_movie = genere_id[d];
-            console.log(id_movie);
+            //console.log(id_movie);
 
             /////////////////////////////////////////////////////7
 
@@ -142,10 +150,42 @@ $(document).ready(function(){
                 //console.log(risposta);
                 var genres = risposta.genres;
                 //console.log(genres);
+                //
+                // for (var z = 0; z < 16; z++) {
+                //   //console.log('movie id: ' + genres[z].id);
+                //   var id_gen_mov = genres[z].id;
+                //   //console.log(id_gen_mov);
+                //   if (id_gen_mov == id_movie) {
+                //     console.log('trovato: ' + genres[z].name);
+                //   }
+                // }
 
-                for (var z = 0; z < 16; z++) {
-                  console.log('movie id: ' + genres[z].id);
-                }
+                $.ajax({
+                  url: "https://api.themoviedb.org/3/genre/tv/list",
+                  method: 'GET',
+                  data: {
+                    'language': 'it-IT',
+                    'api_key': 'd12ae54df472b7dfaec7f47b6ee5fdd3',
+                  },
+                  success: function(risposta){
+                    //console.log(risposta);
+                    var genres = risposta.genres;
+                    //console.log(genres);
+
+                    // for (var x = 0; x < 16; x++) {
+                    //   //console.log('serie tv id: ' + genres[x].id);
+                    //   var id_gen_tv = genres[x].id;
+                    //   //console.log(id_gen_tv);
+                    //   if (id_gen_tv == id_movie) {
+                    //     console.log('trovato: ' + genres[x].name);
+                    //   }
+                    // }
+
+                  }, error: function(richiesta, stato, errori){
+                    console.log(errori);
+
+                  }
+                });
 
               }, error: function(richiesta, stato, errori){
                 console.log(errori);
@@ -153,27 +193,7 @@ $(document).ready(function(){
               }
             });
 
-            $.ajax({
-              url: "https://api.themoviedb.org/3/genre/tv/list",
-              method: 'GET',
-              data: {
-                'language': 'it-IT',
-                'api_key': 'd12ae54df472b7dfaec7f47b6ee5fdd3',
-              },
-              success: function(risposta){
-                //console.log(risposta);
-                var genres = risposta.genres;
-                console.log(genres);
 
-                for (var x = 0; x < 16; x++) {
-                  console.log('serie tv id: ' + genres[x].id);
-                }
-
-              }, error: function(richiesta, stato, errori){
-                console.log(errori);
-
-              }
-            });
           }
 
 

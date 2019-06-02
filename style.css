@@ -95,16 +95,10 @@ h2{
   font-size: 15px;
   display: inline-block;
 }
-
 .card__movie:hover{
   z-index: 2;
   transform: scale(1.1);
   margin:0px 10px;
-}
-.card__movie:first-child:hover{
-  z-index: 2;
-  transform: scale(1.1);
-  margin-left: 20px;
 }
 .card__movie ul li{
   list-style-type: none;
