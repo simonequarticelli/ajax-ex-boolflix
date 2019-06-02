@@ -3,10 +3,6 @@
   margin: 0;
   padding: 0;
 }
-/* body{
-  background-image: url("https://vignette.wikia.nocookie.net/nwnetflix/images/5/50/Wiki-background/revision/latest?cb=20190411162238");
-  background-size: cover;
-} */
 body{
   background-color: #141414;
 }
@@ -17,6 +13,12 @@ header{
   padding:10px;
   background-color: #141414;
   align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 3;
+}
+h2{
+  padding: 5px 0px;
 }
 .header__left{
   color:  #fff;
@@ -28,7 +30,6 @@ header{
   margin-right: 15px;
   cursor: pointer;
 }
-
 .header__left span:hover{
   color: #b3b3b3;
 }
@@ -48,6 +49,11 @@ header{
 .header__search span{
   cursor: pointer;
 }
+.header__search img{
+  width: 30px;
+  height: 30px;
+  margin-left: 20px;
+}
 .fa-search{
   color:white;
   margin-right: 20px;
@@ -57,8 +63,10 @@ header{
 .fa-user-circle{
   margin-left: 20px;
 }
-.fa-caret-down{
+.fa-caret-down:before {
   margin: 0px 50px 0px 5px;
+  font-size: 15px;
+  padding: 5px;
 }
 #search{
   margin-right: 20px;
@@ -68,28 +76,35 @@ header{
   color: white;
 }
 .card__container{
-  display: flex;
-  flex-wrap: wrap;
   background-color: grey;
-  justify-content: space-evenly;
   background-color: #141414;
+  color: #fff;
+  padding: 20px 0px;
+  display: flex;
+  overflow-x:hidden;
 }
 .card__movie{
-  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
   height: 300px;
-  /* margin: 20px; */
-  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+  padding:2px;
   text-align: center;
   cursor: pointer;
-  background-color: black;
-  /* border: 2px solid white; */
-  color: white;
-  transition: .5s;
-  margin: 30px 0px;
+  background-color: black;  color: white;
+  transition: 1s;
   font-size: 15px;
+  display: inline-block;
 }
+
 .card__movie:hover{
+  z-index: 2;
   transform: scale(1.1);
+  margin:0px 10px;
+}
+.card__movie:first-child:hover{
+  z-index: 2;
+  transform: scale(1.1);
+  margin-left: 20px;
 }
 .card__movie ul li{
   list-style-type: none;
@@ -122,7 +137,36 @@ header{
   flex-direction: column;
 }
 .scrool{
-  overflow: auto;
+  overflow-y: auto;
+}
+.container{
+  color: #fff;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  position: relative
+}
+#next,
+#prec{
+  position: absolute;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 150px 5px;
+}
+#next{
+  right: 0;
+  cursor: pointer;
+}
+#prec{
+  left: 0;
+  cursor: pointer;
+}
+.generi{
+  color: #fff;
+}
+.top__100{
+  margin-top: 100px;
 }
 ::-webkit-scrollbar {
   width: 5px;

@@ -15,10 +15,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <!--META TAG VIEWPORT-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--SLICK-JS-->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <!--SLICK-CSS-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <!--CSS-->
     <link rel="stylesheet" href="style.css">
     <!--JAVASCRIPT-->
@@ -27,35 +23,48 @@
   <body>
 
   <header>
-  <div class="header__left">
-      <span><img src="https://fontmeme.com/permalink/190531/5d828b6e3ab3aa3a28d3d1d6c8d7cf81.png" alt=""></span>
-      <strong>Home</strong>
-      <span>Serie TV</span>
-      <span>Film</span>
-      <span>Aggiunti di recente</span>
-      <span>La mia lista</span>
-  </div>
-  <div class="header__right">
-    <div class="header__search">
-      <input id="search"type="text" placeholder="search movies or tv shows" name="" value="">
-      <i class="fas fa-search"></i>
-      <span>BAMBINI</span>
-      <i class="fas fa-bell"></i>
-      <i class="fas fa-user-circle"></i>
-      <i class="fas fa-caret-down"></i>
+    <div class="header__left">
+        <span><img src="https://fontmeme.com/permalink/190531/5d828b6e3ab3aa3a28d3d1d6c8d7cf81.png" alt=""></span>
+        <strong>Home</strong>
+        <span>Serie TV</span>
+        <span>Film</span>
+        <span>Aggiunti di recente</span>
+        <span>La mia lista</span>
     </div>
-  </div>
+    <div class="header__right">
+      <div class="header__search">
+        <input id="search"type="text" placeholder="search movies or tv shows" name="" value="">
+        <i class="fas fa-search"></i>
+        <span>BAMBINI</span>
+        <i class="fas fa-bell"></i>
+        <img src="https://art-s.nflximg.net/a7774/574ffd46d2bcef69802752f39db6320328fa7774.png" alt="">
+        <!-- <i class="fas fa-user-circle"></i> -->
+        <i class="fas fa-caret-down"></i>
+      </div>
+    </div>
   </header>
 
-  <div class="card__container">
-
+  <div class="generi top__100">
+    <h2>Genere1</h2>
   </div>
+  <div class="container">
+    <div id="prec">
+      <i class="fas fa-chevron-left fa-2x"></i>
+    </div>
+    <div class="card__container">
+
+    </div>
+    <div id="next">
+      <i class="fas fa-chevron-right fa-2x"></i>
+    </div>
+  </div>
+
 
 
 
   <!--HANDLEBARS-->
     <script id ="card__template" type ="text/x-handlebars-template">
-      <div class="card__movie" data-id="{{ dato4 }}">
+      <div class="card__movie" data-id="{{ dato4 }}" data-genere="{{ dato8 }}">
         <img class="poster_path"src="{{ dato7 }}" alt="">
         <ul class="info">
           <li class="format"><strong>{{{ dato6 }}}</strong></li>
