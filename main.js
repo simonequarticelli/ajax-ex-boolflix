@@ -23,6 +23,9 @@ $(document).ready(function(){
     $('#prec').click(function(){
       $('.card__container').animate({scrollLeft: '-=1400'}, 800);
       $('#next').show();
+      if ($('.card__container').first('.card__movie').scrollLeft() <= 1400) {
+        $('#prec').hide();
+      }
     })
 
     $('#next').click(function(){
@@ -111,7 +114,7 @@ $(document).ready(function(){
         /////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //controllo se il film inserito non è presente
-        if (contenuto == '') {
+        if (contenuto.length == 0) { //<-- controllo su array vuoto
           Swal.fire({
             title: 'Movie or Tv show not find',
             // text: 'choose another one',
@@ -205,8 +208,6 @@ $(document).ready(function(){
 
           if (img == null) {
             loc = "https://www.macys.com/navapp/web20/assets/img/pdp/productNotAvailable_PDP.png?op_sharpen=1"
-          }else{
-            loc = loc;
           }
 
           /////////////////////////////////////////////////////////////////////////////////////////////////////
